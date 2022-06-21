@@ -1,2 +1,3 @@
 https://go.dev/doc/tutorial/web-service-gin
 https://gorm.io/docs/index.html
+https://github.com/hyperyuri/webapi-with-go

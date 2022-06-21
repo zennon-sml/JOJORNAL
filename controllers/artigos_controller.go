@@ -40,9 +40,9 @@ func PegarArtigo(c *gin.Context) {
 	bd := database.PegarBD()
 	var artigo models.Artigo
 	bd.Debug().First(&artigo, id)
-	artigo.CriadoModelo = artigo.Criado.Format(models.ModeloDeTempo)
-	artigo.AtualizadoModelo = artigo.UpdatedAt.Format(models.ModeloDeTempo)
-	c.HTML(200, "artigo.html", artigo)
+	FormatarTempo(&artigo)
+
+    c.HTML(200, "artigo.html", artigo)
 }
 
 func PegarTodosArtigos(c *gin.Context) {
@@ -50,8 +50,8 @@ func PegarTodosArtigos(c *gin.Context) {
 	var artigos []models.Artigo
 	bd.Debug().Order("id desc").Find(&artigos)
 	for i, _ := range artigos {
-		artigos[i].CriadoModelo = artigos[i].Criado.Format(models.ModeloDeTempo)
-	}
+	    FormatarTempo(&artigos[i])
+    }
 	pagina := models.DadosPagina{Titulo: "todos os artigo", Artigos: artigos}
 	// c.IndentedJSON(200, artigos)
 	c.HTML(200, "jojornal.html", pagina)
@@ -77,6 +77,7 @@ func AtualizarArtigo(c *gin.Context) {
 	artigo.Titulo = titulo
 	artigo.Conteudo = conteudo
 	bd.Debug().Save(artigo)
+    FormatarTempo(&artigo) 
 
 
 	c.HTML(200, "artigo.html", artigo)
