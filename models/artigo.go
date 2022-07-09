@@ -2,29 +2,35 @@ package models
 
 import (
 	"fmt"
-	"log"
-
-	"gorm.io/gorm"
+	"time"
 )
 
 type Artigo struct {
-	gorm.Model
-	Title   string `json:"title"`
-	Content string `json:"content"`
-}
-
-func pegarTodos() {
-	//bd := fazerCon()
-
+	ID       uint64    `gorm:"primarykey:auto_increment" json:"id"`
+	Titulo   string    `gorm:"type:varchar(100)" json:"title"`
+	Conteudo string    `json:"content"`
+	Criado   time.Time `json:"criado"`
 }
 
 func FazerArtigo(a Artigo) {
 	bd := fazerCon()
 	bd.AutoMigrate(&Artigo{})
-	bd.Create(&a)
-	if err := bd.Create(&a).Error; err != nil {
-		log.Fatal(err)
-	} else {
-		fmt.Println("artigo feito")
-	}
+	novoArtigo := bd.Create(&a)
+	// if err := bd.Create(&a).Error; err != nil {
+	// 	log.Fatal("ERRO NO CREATE", err)
+	// }
+	fmt.Println("artigo feito: ", novoArtigo)
+}
+
+func PegarTodosArtigos() []Artigo {
+	bd := fazerCon()
+	bd.AutoMigrate(&Artigo{})
+	var artigos []Artigo
+	bd.Find(&artigos)
+	// for _, a := range artigos {
+	// 	dia := a.Criado.Day()
+	// 	fmt.Print(a.ID, "-", a.Titulo, "dia: ", dia)
+	// 	fmt.Printf("\n%T %T\n", a.ID, a.Titulo)
+	// }
+	return artigos
 }

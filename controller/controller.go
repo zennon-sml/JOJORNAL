@@ -1,8 +1,13 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"log"
 	"net/http"
+	"os"
+	"strings"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/zennon-sml/JOJORNAL/models"
@@ -10,22 +15,49 @@ import (
 
 var artigos []models.Artigo
 
-func getArtigos(c *gin.Context) {
+func pegarArtigos(c *gin.Context) {
 	c.JSON(http.StatusOK, artigos)
 }
 
 func main() {
-	var art models.Artigo
-	var titulo, conteudo string
-	fmt.Print("Titulo: ")
-	fmt.Scanf("%s", &titulo)
-	fmt.Print("Conteudo: ")
-	fmt.Scanf("%s", &conteudo)
-	art.Title = titulo
-	art.Content = conteudo
-
-	models.FazerArtigo(art)
+	models.PegarTodosArtigos()
+	// models.FazerArtigo(fazerBixo())
 	router := gin.Default()
-	router.GET("/artigos", getArtigos)
+	router.GET("/artigos", mostrarArtigos)
 	router.Run(":8080")
+}
+
+func fazerBixo() models.Artigo {
+	reader := bufio.NewReader(os.Stdin)
+	var art models.Artigo
+	var lines []string
+	for i := 0; i < 2; i++ {
+		if i == 0 {
+			fmt.Print("Titulo: ")
+		} else {
+			fmt.Print("Conteudo: ")
+		}
+		line, err := reader.ReadString('\n')
+		if err != nil {
+			log.Fatal(err)
+		}
+		if len(strings.TrimSpace(line)) == 0 {
+			break
+		}
+		lines = append(lines, line)
+	}
+	art.Titulo = lines[0]
+	art.Conteudo = lines[1]
+	art.Criado = time.Now()
+	return art
+}
+
+func criarArtigo(c *gin.Context) {
+	var artigo models.Artigo
+	c.BindJSON(&artigo)
+}
+
+func mostrarArtigos(c *gin.Context) {
+	artigos := models.PegarTodosArtigos()
+	c.BindJSON(&artigos)
 }
