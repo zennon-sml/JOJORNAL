@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -14,14 +15,16 @@ func getArtigos(c *gin.Context) {
 }
 
 func main() {
-	var artigo1 models.Artigo
-	artigo1.ID = 1
-	artigo1.Title = "JOJO"
-	artigo1.Content = "DIIIOOOOOOO"
+	var art models.Artigo
+	var titulo, conteudo string
+	fmt.Print("Titulo: ")
+	fmt.Scanf("%s", &titulo)
+	fmt.Print("Conteudo: ")
+	fmt.Scanf("%s", &conteudo)
+	art.Title = titulo
+	art.Content = conteudo
 
-	a := models.Artigo{ID: 2, Title: "One Piece", Content: "skypie"}
-	b := models.Artigo{ID: 3, Title: "NARUTO", Content: "BRIDGE"}
-	artigos = append(artigos, artigo1, a, b)
+	models.FazerArtigo(art)
 	router := gin.Default()
 	router.GET("/artigos", getArtigos)
 	router.Run(":8080")
