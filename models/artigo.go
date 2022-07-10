@@ -14,6 +14,11 @@ type Artigo struct {
 	Criado   time.Time `gorm:"autoCreateTime" json:"criado"`
 }
 
+// pra mandar dados como o titulo da pagina
+type DadosPagina struct {
+	Titulo string `json:"titulo"`
+}
+
 func FazerArtigo(c *gin.Context) {
 	bd := fazerCon()
 
@@ -65,4 +70,12 @@ func AtualizarArtigo(c *gin.Context) {
 	bd.Save(&artigoVelho)
 
 	c.IndentedJSON(201, artigoVelho)
+}
+
+func HTMLExemplo(c *gin.Context) {
+	titulo := DadosPagina{
+		Titulo: "123 testando",
+	} //json que vai ser mandado pra pagina
+	c.HTML(200, "artigo.html", titulo)
+	//   status   qual HTML     JSON
 }
