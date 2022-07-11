@@ -1,0 +1,13 @@
+{{ template "header.html" . }}
+    <ul>
+    {{ range .Artigos }}
+        <div class="row">
+            <div class="card green">
+            <h2>{{.Titulo}}</h2>
+            <p>{{.Conteudo}} <br><weak>{{.Criado}}</weak></p>
+            <img class="image" src="/static/img/money.png" alt="IMG" />
+            
+            </div>
+    {{ end}}
+    </ul>
+{{ template "footer.html" . }}

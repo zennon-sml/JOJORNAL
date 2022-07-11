@@ -16,7 +16,8 @@ type Artigo struct {
 
 // pra mandar dados como o titulo da pagina
 type DadosPagina struct {
-	Titulo string `json:"titulo"`
+	Titulo  string   `json:"titulo"`
+	Artigos []Artigo `json:"artigos"`
 }
 
 func FazerArtigo(c *gin.Context) {
@@ -44,7 +45,9 @@ func PegarTodosArtigos(c *gin.Context) {
 	bd := fazerCon()
 	var artigos []Artigo
 	bd.Find(&artigos)
-	c.IndentedJSON(200, artigos)
+	pagina := DadosPagina{Titulo: "todos os artigo", Artigos: artigos}
+	// c.IndentedJSON(200, artigos)
+	c.HTML(200, "jojornal.html", pagina)
 }
 
 //TODO em vez de pegar o id pela url mandar todo a struct

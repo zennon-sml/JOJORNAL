@@ -9,7 +9,8 @@ func main() {
 	// models.FazerArtigo(fazerBixo())
 
 	router := gin.Default()
-	router.LoadHTMLGlob("templates/*")
+	router.Static("/static", "./static/")
+	router.LoadHTMLGlob("templates/*.html") //templates
 	//routes
 	router.GET("/artigos", models.PegarTodosArtigos)
 	router.GET("/artigos/:id", models.PegarArtigo)
