@@ -6,3 +6,9 @@
 2022-07-10
 
 ![JOJORNAL](https://user-images.githubusercontent.com/76619871/178141881-3bcea44c-d167-48e9-b45a-e8d22b4a4749.png)
+
+
+2022-07-11
+
+![image](https://user-images.githubusercontent.com/76619871/178313806-326de91a-d91b-4d89-b15c-9a29a435d4a4.png)
+
