@@ -3,7 +3,15 @@
 <!--Embed the header.html template at this location-->
 {{ template "header.html" .}}
 
-  <h1>Hello Gin! esse é o meu titulo {{.Titulo}}</h1>
+  <h1>Hello Gin!</h1>
+  <h1>{{.Titulo}}</h1>
+  <h1>{{.Conteudo}}</h1>
+  <h2>{{.Criado}}</h2>
+  <form method="POST" action="/artigos/{{.ID}}" >
+    <h1 color="red">
+    <label>apagar da face da terra</label>
+  <input name="apagar" type="submit"></h1>
+  </form>
 
 <!--Embed the footer.html template at this location-->
 {{ template "footer.html" .}}

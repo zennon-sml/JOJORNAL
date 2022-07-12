@@ -14,9 +14,9 @@ func main() {
 	//routes
 	router.GET("/artigos", models.PegarTodosArtigos)
 	router.GET("/artigos/:id", models.PegarArtigo)
-	router.DELETE("/artigos/:id", models.ApagarArtigo)
+	router.GET("/artigos/novo", models.FormArtigo)
+	router.POST("/artigos/novo", models.FazerArtigo)
+	router.POST("/artigos/:id", models.ApagarArtigo)
 	router.PUT("/artigos", models.AtualizarArtigo)
-	router.POST("/artigos", models.FazerArtigo)
-	router.GET("/", models.HTMLExemplo)
 	router.Run(":8080")
 }

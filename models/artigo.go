@@ -17,34 +17,46 @@ type Artigo struct {
 // pra mandar dados como o titulo da pagina
 type DadosPagina struct {
 	Titulo  string   `json:"titulo"`
+	Novo    bool     `json:"novo"`
 	Artigos []Artigo `json:"artigos"`
 }
 
+func FormArtigo(c *gin.Context) {
+	dados := DadosPagina{Titulo: "GET"}
+	c.HTML(200, "fazerArtigo.html", dados)
+}
+
 func FazerArtigo(c *gin.Context) {
-	bd := fazerCon()
-
 	var artigo Artigo
+	titulo := c.Request.FormValue("titulo")
+	conteudo := c.Request.FormValue("conteudo")
+	artigo.Titulo = titulo
+	artigo.Conteudo = conteudo
+	bd := fazerCon()
+	bd.Debug().Create(&artigo)
 
-	if err := c.BindJSON(&artigo); err != nil {
-		log.Fatal("ERRO FAZENDO ARTIGO, ", err)
-	}
-	bd.Create(&artigo)
-	c.IndentedJSON(201, artigo)
+	c.HTML(200, "artigo.html", artigo)
+	// bd := fazerCon()
+	// var artigo Artigo
+	// if err := c.BindJSON(&artigo); err != nil {
+	// 	log.Fatal("ERRO FAZENDO ARTIGO, ", err)
+	// }
+	// bd.Debug().Create(&artigo)
 }
 
 func PegarArtigo(c *gin.Context) {
 	id := c.Param("id")
 	bd := fazerCon()
 	var artigo Artigo
-	bd.First(&artigo, id)
+	bd.Debug().First(&artigo, id)
 
-	c.IndentedJSON(200, artigo)
+	c.HTML(200, "artigo.html", artigo)
 }
 
 func PegarTodosArtigos(c *gin.Context) {
 	bd := fazerCon()
 	var artigos []Artigo
-	bd.Find(&artigos)
+	bd.Debug().Find(&artigos)
 	pagina := DadosPagina{Titulo: "todos os artigo", Artigos: artigos}
 	// c.IndentedJSON(200, artigos)
 	c.HTML(200, "jojornal.html", pagina)
@@ -55,7 +67,7 @@ func ApagarArtigo(c *gin.Context) {
 	id := c.Param("id")
 	bd := fazerCon()
 	var artigo Artigo
-	bd.Delete(&artigo, id)
+	bd.Debug().Delete(&artigo, id)
 
 	c.IndentedJSON(204, artigo)
 }
@@ -70,7 +82,7 @@ func AtualizarArtigo(c *gin.Context) {
 	bd.First(&artigoVelho, artigoNovo.ID)
 	artigoVelho.Titulo = artigoNovo.Titulo
 	artigoVelho.Conteudo = artigoNovo.Conteudo
-	bd.Save(&artigoVelho)
+	bd.Debug().Save(&artigoVelho)
 
 	c.IndentedJSON(201, artigoVelho)
 }

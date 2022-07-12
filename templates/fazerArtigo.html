@@ -1,0 +1,16 @@
+<!--index.html-->
+
+<!--Embed the header.html template at this location-->
+{{ template "header.html" .}}
+
+  <h1>Hello Gin! </h1>
+  <form method="POST" action="">
+    <label for="titulo">Titulo: </label>
+    <input name="titulo" id="titulo" type="teIxt"/></br>
+    <label for="conteudo">conteudo: </label>
+    <input name="conteudo" id="conteudo" type="text"/><br>
+    <input type="submit">   
+</form>
+
+<!--Embed the footer.html template at this location-->
+{{ template "footer.html" .}}

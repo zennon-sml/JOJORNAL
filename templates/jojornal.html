@@ -2,12 +2,15 @@
     <ul>
     {{ range .Artigos }}
         <div class="row">
+            
             <div class="card green">
+            <a href="/artigos/{{.ID}}">
             <h2>{{.Titulo}}</h2>
             <p>{{.Conteudo}} <br><weak>{{.Criado}}</weak></p>
             <img class="image" src="/static/img/money.png" alt="IMG" />
-            
+            </a>
             </div>
+            
     {{ end}}
     </ul>
 {{ template "footer.html" . }}
