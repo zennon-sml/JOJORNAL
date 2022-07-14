@@ -1,16 +1,19 @@
 {{ template "header.html" . }}
     <ul>
     {{ range .Artigos }}
+        
         <div class="row">
-            
+            <li>
             <div class="card green">
             <a href="/artigos/{{.ID}}">
             <h2>{{.Titulo}}</h2>
-            <p>{{.Conteudo}} <br><weak>{{.Criado}}</weak></p>
+            <h4>{{.Conteudo}} </h4>
+            <weak>{{.Criado}}</weak>
             <img class="image" src="/static/img/money.png" alt="IMG" />
             </a>
+            </li>
             </div>
-            
+        
     {{ end}}
     </ul>
 {{ template "footer.html" . }}

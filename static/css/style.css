@@ -1,5 +1,5 @@
 body {
-  background-image: url('/static/img/emerald.png');
+  background-image: url('/static/img/chinese-hills.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 100% 100%;
@@ -13,9 +13,10 @@ body {
   transition: all 0.3s ease-out;
 }
 .row {
-  display:flex;
+  display:grid;
   justify-content: center;
   align-items: center;
+  
 }
 .green {
   border-left: 3px solid #3bb54a;
@@ -37,6 +38,10 @@ footer {
 
 .footer-links li {
   display: inline;
+}
+.card li {
+  display:grid;
+  list-style-type: upper-alpha;
 }
 
 .text-center {
@@ -72,4 +77,10 @@ footer {
 
 .active {
   background-color: #04AA6D;
+}
+
+.icon {
+  float: left;
+  max-width: 40px;
+  max-height: 40px;
 }

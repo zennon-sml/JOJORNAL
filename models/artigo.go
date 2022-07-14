@@ -7,6 +7,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+var ModeloDeTempo string = "2006-01-02 15:04:05"
+
 type Artigo struct {
 	ID       uint64    `gorm:"primarykey:auto_increment" json:"id"`
 	Titulo   string    `gorm:"type:varchar(100)" json:"titulo"`
@@ -28,20 +30,14 @@ func FormArtigo(c *gin.Context) {
 
 func FazerArtigo(c *gin.Context) {
 	var artigo Artigo
-	titulo := c.Request.FormValue("titulo")
-	conteudo := c.Request.FormValue("conteudo")
+	titulo := c.DefaultPostForm("titulo", "not found")
+	conteudo := c.DefaultPostForm("conteudo", "not found")
 	artigo.Titulo = titulo
 	artigo.Conteudo = conteudo
 	bd := fazerCon()
 	bd.Debug().Create(&artigo)
 
 	c.HTML(200, "artigo.html", artigo)
-	// bd := fazerCon()
-	// var artigo Artigo
-	// if err := c.BindJSON(&artigo); err != nil {
-	// 	log.Fatal("ERRO FAZENDO ARTIGO, ", err)
-	// }
-	// bd.Debug().Create(&artigo)
 }
 
 func PegarArtigo(c *gin.Context) {
@@ -49,14 +45,13 @@ func PegarArtigo(c *gin.Context) {
 	bd := fazerCon()
 	var artigo Artigo
 	bd.Debug().First(&artigo, id)
-
 	c.HTML(200, "artigo.html", artigo)
 }
 
 func PegarTodosArtigos(c *gin.Context) {
 	bd := fazerCon()
 	var artigos []Artigo
-	bd.Debug().Find(&artigos)
+	bd.Debug().Order("id desc").Find(&artigos)
 	pagina := DadosPagina{Titulo: "todos os artigo", Artigos: artigos}
 	// c.IndentedJSON(200, artigos)
 	c.HTML(200, "jojornal.html", pagina)
@@ -69,7 +64,7 @@ func ApagarArtigo(c *gin.Context) {
 	var artigo Artigo
 	bd.Debug().Delete(&artigo, id)
 
-	c.IndentedJSON(204, artigo)
+	PegarTodosArtigos(c)
 }
 
 func AtualizarArtigo(c *gin.Context) {
