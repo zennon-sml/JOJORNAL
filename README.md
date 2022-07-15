@@ -18,5 +18,5 @@
 
 2022-07-15
 
-![image](https://user-images.githubusercontent.com/76619871/179292511-93e32732-947f-4ad7-853b-0f60cf6e1a0c.png)
+![JOJORNALCRUD](https://user-images.githubusercontent.com/76619871/179321530-47b7bda0-e1af-4043-8987-42264dd46532.png)
 
