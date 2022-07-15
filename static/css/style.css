@@ -52,14 +52,22 @@ footer {
 .bar ul {
   width: 100;
   list-style-type: none;
-  margin: 0;
-  padding: 0;
+  margin: 100;
+  padding: 100;
   overflow: hidden;
   background-color: #333;
 }
 
 .bar li {
   float: left;
+  list-style-type: none;
+}
+.esquerda li {
+  float: left;
+  list-style-type: none;
+}
+.direita li {
+  float: right;
   list-style-type: none;
 }
 

@@ -1,7 +1,7 @@
 package models
 
 import (
-	"log"
+	"fmt"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -22,9 +22,23 @@ type DadosPagina struct {
 	Novo    bool     `json:"novo"`
 	Artigos []Artigo `json:"artigos"`
 }
+type DadosPagina1 struct {
+	Titulo string `json:"titulo"`
+	Novo   bool   `json:"novo"`
+	Artigo Artigo `json:"artigos"`
+}
 
 func FormArtigo(c *gin.Context) {
-	dados := DadosPagina{Titulo: "GET"}
+	dados := DadosPagina{Titulo: "fazer artigo"}
+	c.HTML(200, "fazerArtigo.html", dados)
+}
+
+func FormAtualizarArtigo(c *gin.Context) {
+	id := c.Param("id")
+	bd := fazerCon()
+	var artigo Artigo
+	bd.First(&artigo, id)
+	dados := DadosPagina1{Titulo: "Atualizar artigo", Artigo: artigo}
 	c.HTML(200, "fazerArtigo.html", dados)
 }
 
@@ -68,18 +82,18 @@ func ApagarArtigo(c *gin.Context) {
 }
 
 func AtualizarArtigo(c *gin.Context) {
-	bd := fazerCon()
-	var artigoNovo Artigo
-	if err := c.BindJSON(&artigoNovo); err != nil {
-		log.Fatal("ERRO FAZENDO ARTIGO, ", err)
-	}
-	var artigoVelho Artigo
-	bd.First(&artigoVelho, artigoNovo.ID)
-	artigoVelho.Titulo = artigoNovo.Titulo
-	artigoVelho.Conteudo = artigoNovo.Conteudo
-	bd.Debug().Save(&artigoVelho)
+	fmt.Println("atualizando")
 
-	c.IndentedJSON(201, artigoVelho)
+	PegarArtigo(c)
+	// bd := fazerCon()
+	// var artigoVelho Artigo
+	// bd.First(&artigoVelho, artigoNovo.ID)
+	// artigoVelho.Titulo = artigoNovo.Titulo
+	// artigoVelho.Conteudo = artigoNovo.Conteudo
+	// bd.Debug().Save(&artigoVelho)
+
+	// c.IndentedJSON(201, artigoVelho)
+
 }
 
 func HTMLExemplo(c *gin.Context) {

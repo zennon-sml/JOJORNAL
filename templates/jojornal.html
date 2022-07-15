@@ -9,8 +9,22 @@
             <h2>{{.Titulo}}</h2>
             <h4>{{.Conteudo}} </h4>
             <weak>{{.Criado}}</weak>
-            <img class="image" src="/static/img/money.png" alt="IMG" />
+            <!-- <img class="image" src="/static/img/money.png" alt="IMG" /> -->
             </a>
+            <ul class="bar">
+                <li>
+              <form method="POST" action="/artigos/{{.ID}}" >
+              <button onclick="return confirm('Deseja Apagar O Arquivo?');" 
+            id="btnDelete"><img class="icon" src="/static/img/remove.png"></button>
+              </form>
+                </li>
+                <li>
+              <form method="POST" action="/artigos/{{.ID}}" >
+                <button onclick="return confirm('Deseja Apagar O Arquivo?');" 
+              id="btnDelete"><img class="icon" src="/static/img/atualizar.png"></button>
+                </form>
+              </li>
+              </ul>
             </li>
             </div>
         

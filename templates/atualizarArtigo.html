@@ -1,0 +1,21 @@
+<!--index.html-->
+
+<!--Embed the header.html template at this location-->
+{{ template "header.html" .}}
+
+  <h1>Hello Gin!</h1>
+  <form method="POST" action="">
+    <label for="titulo">Titulo: </label>
+    {{ if .Artigo}}
+    <input name="titulo" id="titulo" type="teIxt" value="{{.Titulo}}"/></br>
+    {{ else }}
+    <input name="titulo" id="titulo" type="teIxt"/></br>
+    {{ end }}
+    <label for="conteudo">conteudo: </label>
+    <input name="conteudo" id="conteudo" type="text"/><br>
+    <button onclick="return confirm('Artigo Feito!!!!');" 
+id="btnDelete"><h4>FAZER</h4></button>
+</form>
+
+<!--Embed the footer.html template at this location-->
+{{ template "footer.html" .}}
