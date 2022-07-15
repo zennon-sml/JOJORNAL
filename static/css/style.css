@@ -52,8 +52,8 @@ footer {
 .bar ul {
   width: 100;
   list-style-type: none;
-  margin: 100;
-  padding: 100;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
   background-color: #333;
 }
@@ -61,10 +61,14 @@ footer {
 .bar li {
   float: left;
   list-style-type: none;
+  margin: 100;
+  padding: 100;
 }
 .esquerda li {
   float: left;
   list-style-type: none;
+  margin: 100;
+  padding: 100;
 }
 .direita li {
   float: right;
@@ -91,4 +95,9 @@ footer {
   float: left;
   max-width: 40px;
   max-height: 40px;
+}
+
+.para {
+  background-color: #333;
+  color:bisque;
 }

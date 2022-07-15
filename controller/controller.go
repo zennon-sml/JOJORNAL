@@ -17,6 +17,8 @@ func main() {
 	router.GET("/artigos/novo", models.FormArtigo)
 	router.POST("/artigos/novo", models.FazerArtigo)
 	router.POST("/artigos/:id", models.ApagarArtigo)
-	// router.PUT("/artigos/:id", models.AtualizarArtigo)
+	router.POST("/artigos/atualizar/form/:id", models.FormAtualizarArtigo)
+	router.POST("/artigos/atualizar/:id", models.AtualizarArtigo)
+
 	router.Run(":8080")
 }

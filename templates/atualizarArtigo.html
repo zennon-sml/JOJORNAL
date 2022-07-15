@@ -4,17 +4,13 @@
 {{ template "header.html" .}}
 
   <h1>Hello Gin!</h1>
-  <form method="POST" action="">
-    <label for="titulo">Titulo: </label>
-    {{ if .Artigo}}
-    <input name="titulo" id="titulo" type="teIxt" value="{{.Titulo}}"/></br>
-    {{ else }}
-    <input name="titulo" id="titulo" type="teIxt"/></br>
-    {{ end }}
-    <label for="conteudo">conteudo: </label>
-    <input name="conteudo" id="conteudo" type="text"/><br>
-    <button onclick="return confirm('Artigo Feito!!!!');" 
-id="btnDelete"><h4>FAZER</h4></button>
+  <form method="POST" action="/artigos/atualizar/{{.Artigo.ID}}">
+    <label for="titulo">Novo Titulo: </label>
+    <input name="titulo" id="titulo" type="teIxt" value="{{.Artigo.Titulo}}"/></br>
+    <label for="conteudo">Novo Conteudo: </label>
+    <input name="conteudo" id="conteudo" type="text" value="{{.Artigo.Conteudo}}"/><br>
+    <button onclick="return confirm('Artigo Atualizado!!!!');"
+    ><h4>ATUALIZAR</h4></button>
 </form>
 
 <!--Embed the footer.html template at this location-->

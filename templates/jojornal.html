@@ -7,7 +7,7 @@
             <div class="card green">
             <a href="/artigos/{{.ID}}">
             <h2>{{.Titulo}}</h2>
-            <h4>{{.Conteudo}} </h4>
+            <!-- <h4>{{.Conteudo}} </h4> -->
             <weak>{{.Criado}}</weak>
             <!-- <img class="image" src="/static/img/money.png" alt="IMG" /> -->
             </a>
@@ -18,11 +18,12 @@
             id="btnDelete"><img class="icon" src="/static/img/remove.png"></button>
               </form>
                 </li>
+                <li><hr width="30" color="none"></li>
                 <li>
-              <form method="POST" action="/artigos/{{.ID}}" >
-                <button onclick="return confirm('Deseja Apagar O Arquivo?');" 
-              id="btnDelete"><img class="icon" src="/static/img/atualizar.png"></button>
-                </form>
+                  <form method="POST" action="/artigos/atualizar/form/{{.ID}}" >
+                    <button id="btnDelete"><img class="icon" src="/static/img/atualizar.png"></button>
+                    </form>
+                  </li>
               </li>
               </ul>
             </li>

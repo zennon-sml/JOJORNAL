@@ -3,19 +3,21 @@
 <!--Embed the header.html template at this location-->
 {{ template "header.html" .}}
 
-  <h1>Artigo Numero: {{.ID}}</h1>
-  <h1>{{.Titulo}}</h1>
-  <h3>dia: {{.Criado}}</h3>
-  <p>{{.Conteudo}}</p>
+  <h1 class="para">Artigo Numero: {{.ID}}</h1>
+  <h1 class="para">{{.Titulo}}</h1>
+  <h3 class="para">dia criado: {{.Criado}}</h3>
+  <h3 class="para">Ultima Atualização: {{.UpdatedAt}}</h3>
+  <h3><p class="para">{{.Conteudo}}</p></h3>
   <ul class="bar">
-    <li>
+    <li class="esquerda">
   <form method="POST" action="/artigos/{{.ID}}" >
   <button onclick="return confirm('Deseja Apagar O Arquivo?');" 
 id="btnDelete"><img class="icon" src="/static/img/remove.png"></button>
   </form>
     </li>
-    <li>
-  <form method="PUT" action="/artigos/{{.ID}}" >
+    <li><hr width="30" color="none"></li>
+    <li class="direita">
+    <form method="POST" action="atualizar/form/{{.ID}}" >
     <button id="btnDelete"><img class="icon" src="/static/img/atualizar.png"></button>
     </form>
   </li>

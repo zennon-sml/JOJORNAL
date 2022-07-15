@@ -10,10 +10,11 @@ import (
 var ModeloDeTempo string = "2006-01-02 15:04:05"
 
 type Artigo struct {
-	ID       uint64    `gorm:"primarykey:auto_increment" json:"id"`
-	Titulo   string    `gorm:"type:varchar(100)" json:"titulo"`
-	Conteudo string    `json:"conteudo"`
-	Criado   time.Time `gorm:"autoCreateTime" json:"criado"`
+	ID        uint64    `gorm:"primarykey:auto_increment" json:"id"`
+	Titulo    string    `gorm:"type:varchar(100)" json:"titulo"`
+	Conteudo  string    `json:"conteudo"`
+	Criado    time.Time `gorm:"autoCreateTime" json:"criado"`
+	UpdatedAt time.Time
 }
 
 // pra mandar dados como o titulo da pagina
@@ -39,7 +40,7 @@ func FormAtualizarArtigo(c *gin.Context) {
 	var artigo Artigo
 	bd.First(&artigo, id)
 	dados := DadosPagina1{Titulo: "Atualizar artigo", Artigo: artigo}
-	c.HTML(200, "fazerArtigo.html", dados)
+	c.HTML(200, "atualizarArtigo.html", dados)
 }
 
 func FazerArtigo(c *gin.Context) {
@@ -82,18 +83,19 @@ func ApagarArtigo(c *gin.Context) {
 }
 
 func AtualizarArtigo(c *gin.Context) {
-	fmt.Println("atualizando")
 
-	PegarArtigo(c)
-	// bd := fazerCon()
-	// var artigoVelho Artigo
-	// bd.First(&artigoVelho, artigoNovo.ID)
-	// artigoVelho.Titulo = artigoNovo.Titulo
-	// artigoVelho.Conteudo = artigoNovo.Conteudo
-	// bd.Debug().Save(&artigoVelho)
+	id := c.Param("id")
+	titulo := c.DefaultPostForm("titulo", "not found")
+	conteudo := c.DefaultPostForm("conteudo", "not found")
+	var artigo Artigo
+	bd := fazerCon()
+	bd.First(&artigo, id)
+	artigo.Titulo = titulo
+	artigo.Conteudo = conteudo
+	bd.Debug().Save(artigo)
 
-	// c.IndentedJSON(201, artigoVelho)
-
+	fmt.Println(id, titulo, conteudo, artigo)
+	c.HTML(200, "artigo.html", artigo)
 }
 
 func HTMLExemplo(c *gin.Context) {

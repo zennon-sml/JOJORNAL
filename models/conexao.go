@@ -10,6 +10,8 @@ import (
 	"gorm.io/gorm"
 )
 
+var artigo Artigo
+
 func fazerCon() *gorm.DB { //*sql.DB
 	err := godotenv.Load(".env")
 	if err != nil {
@@ -28,5 +30,6 @@ func fazerCon() *gorm.DB { //*sql.DB
 	if err != nil {
 		log.Fatal("não foi possivel estabelecer conexão ", err)
 	}
+	bd.AutoMigrate(&artigo)
 	return bd
 }
