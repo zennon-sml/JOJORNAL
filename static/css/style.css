@@ -26,6 +26,9 @@ body {
   max-width: 64px;
   max-height: 64px;
 }
+.grid{
+  float: left;
+}
 
 footer {
   position: fixed;

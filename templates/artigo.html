@@ -5,7 +5,7 @@
 
   <h1 class="para">Artigo Numero: {{.ID}}</h1>
   <h1 class="para">{{.Titulo}}</h1>
-  <h3 class="para">dia criado: {{.Criado}}</h3>
+  <h3 class="para">dia criado: {{.CriadoModelo}}</h3>
   <h3 class="para">Ultima Atualização: {{.UpdatedAt}}</h3>
   <h3><p class="para">{{.Conteudo}}</p></h3>
   <ul class="bar">
@@ -17,7 +17,7 @@ id="btnDelete"><img class="icon" src="/static/img/remove.png"></button>
     </li>
     <li><hr width="30" color="none"></li>
     <li class="direita">
-    <form method="POST" action="atualizar/form/{{.ID}}" >
+    <form method="POST" action="/artigos/atualizar/form/{{.ID}}" >
     <button id="btnDelete"><img class="icon" src="/static/img/atualizar.png"></button>
     </form>
   </li>

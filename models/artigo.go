@@ -10,22 +10,21 @@ import (
 var ModeloDeTempo string = "2006-01-02 15:04:05"
 
 type Artigo struct {
-	ID        uint64    `gorm:"primarykey:auto_increment" json:"id"`
-	Titulo    string    `gorm:"type:varchar(100)" json:"titulo"`
-	Conteudo  string    `json:"conteudo"`
-	Criado    time.Time `gorm:"autoCreateTime" json:"criado"`
-	UpdatedAt time.Time
+	ID           uint64    `gorm:"primarykey:auto_increment" json:"id"`
+	Titulo       string    `gorm:"type:varchar(100)" json:"titulo"`
+	Conteudo     string    `json:"conteudo"`
+	Criado       time.Time `gorm:"autoCreateTime" json:"criado"`
+	UpdatedAt    time.Time
+	CriadoModelo string `json: "criadoModelo"`
 }
 
 // pra mandar dados como o titulo da pagina
 type DadosPagina struct {
 	Titulo  string   `json:"titulo"`
-	Novo    bool     `json:"novo"`
 	Artigos []Artigo `json:"artigos"`
 }
 type DadosPagina1 struct {
 	Titulo string `json:"titulo"`
-	Novo   bool   `json:"novo"`
 	Artigo Artigo `json:"artigos"`
 }
 
@@ -60,6 +59,7 @@ func PegarArtigo(c *gin.Context) {
 	bd := fazerCon()
 	var artigo Artigo
 	bd.Debug().First(&artigo, id)
+	artigo.CriadoModelo = artigo.Criado.Format(ModeloDeTempo)
 	c.HTML(200, "artigo.html", artigo)
 }
 
@@ -67,6 +67,11 @@ func PegarTodosArtigos(c *gin.Context) {
 	bd := fazerCon()
 	var artigos []Artigo
 	bd.Debug().Order("id desc").Find(&artigos)
+	for _, ar := range artigos {
+		ar.CriadoModelo = ar.Criado.Format(ModeloDeTempo)
+		fmt.Println(ar.CriadoModelo)
+	}
+	fmt.Println(artigos[1].CriadoModelo)
 	pagina := DadosPagina{Titulo: "todos os artigo", Artigos: artigos}
 	// c.IndentedJSON(200, artigos)
 	c.HTML(200, "jojornal.html", pagina)
@@ -96,12 +101,4 @@ func AtualizarArtigo(c *gin.Context) {
 
 	fmt.Println(id, titulo, conteudo, artigo)
 	c.HTML(200, "artigo.html", artigo)
-}
-
-func HTMLExemplo(c *gin.Context) {
-	titulo := DadosPagina{
-		Titulo: "123 testando",
-	} //json que vai ser mandado pra pagina
-	c.HTML(200, "artigo.html", titulo)
-	//   status   qual HTML     JSON
 }
