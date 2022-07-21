@@ -16,6 +16,7 @@ type Artigo struct {
 	Criado       time.Time `gorm:"autoCreateTime" json:"criado"`
 	UpdatedAt    time.Time
 	CriadoModelo string `json: "criadoModelo"`
+	AtualizadoModelo string `json: "AtualizadoModelo"`
 }
 
 // pra mandar dados como o titulo da pagina
@@ -60,6 +61,7 @@ func PegarArtigo(c *gin.Context) {
 	var artigo Artigo
 	bd.Debug().First(&artigo, id)
 	artigo.CriadoModelo = artigo.Criado.Format(ModeloDeTempo)
+	artigo.AtualizadoModelo = artigo.UpdatedAt.Format(ModeloDeTempo)
 	c.HTML(200, "artigo.html", artigo)
 }
 
@@ -67,9 +69,8 @@ func PegarTodosArtigos(c *gin.Context) {
 	bd := fazerCon()
 	var artigos []Artigo
 	bd.Debug().Order("id desc").Find(&artigos)
-	for _, ar := range artigos {
-		ar.CriadoModelo = ar.Criado.Format(ModeloDeTempo)
-		fmt.Println(ar.CriadoModelo)
+	for i, _ := range artigos {
+		artigos[i].CriadoModelo = artigos[i].Criado.Format(ModeloDeTempo)
 	}
 	fmt.Println(artigos[1].CriadoModelo)
 	pagina := DadosPagina{Titulo: "todos os artigo", Artigos: artigos}
