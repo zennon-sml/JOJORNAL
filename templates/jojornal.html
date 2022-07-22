@@ -5,7 +5,7 @@
         <div class="row">
             <li class="grid">
             <div class="card green">
-            <a href="/artigos/{{.ID}}">
+            <a href="/jojornal/v1/artigos/{{.ID}}">
             <h2>{{.Titulo}}</h2>
             <!-- <h4>{{.Conteudo}} </h4> -->
             <weak>{{.CriadoModelo}}</weak>
@@ -13,14 +13,14 @@
             </a>
             <ul class="bar">
                 <li>
-              <form method="POST" action="/artigos/{{.ID}}" >
+              <form method="POST" action="/jojornal/v1/artigos/{{.ID}}" >
               <button onclick="return confirm('Deseja Apagar O Arquivo?');" 
             id="btnDelete"><img class="icon" src="/static/img/remove.png"></button>
               </form>
                 </li>
                 <li><hr width="30" color="none"></li>
                 <li>
-                  <form method="POST" action="/artigos/atualizar/form/{{.ID}}" >
+                  <form method="POST" action="/jojornal/v1/artigos/atualizar/form/{{.ID}}" >
                     <button id="btnDelete"><img class="icon" src="/static/img/atualizar.png"></button>
                     </form>
                   </li>

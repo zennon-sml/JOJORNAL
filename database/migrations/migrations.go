@@ -5,6 +5,6 @@ import(
     "gorm.io/gorm"
 )
 
-func fazerMigrations(bd *gorm.DB){
-    db.AutoMigrate(models.Artigo)
+func FazerMigrations(bd *gorm.DB){
+    bd.AutoMigrate(models.Artigo{})
 }

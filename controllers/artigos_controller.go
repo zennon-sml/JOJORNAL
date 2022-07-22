@@ -10,50 +10,49 @@ func Test(c *gin.Context){
     c.JSON(200, gin.H{"test": "testando"})
 }
 func FormArtigo(c *gin.Context) {
-	dados := DadosPagina{Titulo: "fazer artigo"}
+	dados := models.DadosPagina{Titulo: "fazer artigo"}
 	c.HTML(200, "fazerArtigo.html", dados)
 }
 
 func FormAtualizarArtigo(c *gin.Context) {
 	id := c.Param("id")
-	bd := fazerCon()
-	var artigo Artigo
+	bd := database.PegarBD()
+	var artigo models.Artigo
 	bd.First(&artigo, id)
-	dados := DadosPagina1{Titulo: "Atualizar artigo", Artigo: artigo}
+	dados := models.DadosPagina1{Titulo: "Atualizar artigo", Artigo: artigo}
 	c.HTML(200, "atualizarArtigo.html", dados)
 }
 
 func FazerArtigo(c *gin.Context) {
-	var artigo Artigo
+	var artigo models.Artigo
 	titulo := c.DefaultPostForm("titulo", "not found")
 	conteudo := c.DefaultPostForm("conteudo", "not found")
 	artigo.Titulo = titulo
 	artigo.Conteudo = conteudo
-	bd := fazerCon()
+	bd := database.PegarBD()
 	bd.Debug().Create(&artigo)
-
+	FormatarTempo(&artigo)
 	c.HTML(200, "artigo.html", artigo)
 }
 
 func PegarArtigo(c *gin.Context) {
 	id := c.Param("id")
-	bd := fazerCon()
-	var artigo Artigo
+	bd := database.PegarBD()
+	var artigo models.Artigo
 	bd.Debug().First(&artigo, id)
-	artigo.CriadoModelo = artigo.Criado.Format(ModeloDeTempo)
-	artigo.AtualizadoModelo = artigo.UpdatedAt.Format(ModeloDeTempo)
+	artigo.CriadoModelo = artigo.Criado.Format(models.ModeloDeTempo)
+	artigo.AtualizadoModelo = artigo.UpdatedAt.Format(models.ModeloDeTempo)
 	c.HTML(200, "artigo.html", artigo)
 }
 
 func PegarTodosArtigos(c *gin.Context) {
-	bd := fazerCon()
-	var artigos []Artigo
+	bd := database.PegarBD()
+	var artigos []models.Artigo
 	bd.Debug().Order("id desc").Find(&artigos)
 	for i, _ := range artigos {
-		artigos[i].CriadoModelo = artigos[i].Criado.Format(ModeloDeTempo)
+		artigos[i].CriadoModelo = artigos[i].Criado.Format(models.ModeloDeTempo)
 	}
-	fmt.Println(artigos[1].CriadoModelo)
-	pagina := DadosPagina{Titulo: "todos os artigo", Artigos: artigos}
+	pagina := models.DadosPagina{Titulo: "todos os artigo", Artigos: artigos}
 	// c.IndentedJSON(200, artigos)
 	c.HTML(200, "jojornal.html", pagina)
 }
@@ -61,25 +60,29 @@ func PegarTodosArtigos(c *gin.Context) {
 //TODO em vez de pegar o id pela url mandar todo a struct
 func ApagarArtigo(c *gin.Context) {
 	id := c.Param("id")
-	bd := fazerCon()
-	var artigo Artigo
+	bd := database.PegarBD()
+	var artigo models.Artigo
 	bd.Debug().Delete(&artigo, id)
 
 	PegarTodosArtigos(c)
 }
 
 func AtualizarArtigo(c *gin.Context) {
-
 	id := c.Param("id")
 	titulo := c.DefaultPostForm("titulo", "not found")
 	conteudo := c.DefaultPostForm("conteudo", "not found")
-	var artigo Artigo
-	bd := fazerCon()
+	var artigo models.Artigo
+	bd := database.PegarBD()
 	bd.First(&artigo, id)
 	artigo.Titulo = titulo
 	artigo.Conteudo = conteudo
 	bd.Debug().Save(artigo)
 
-	fmt.Println(id, titulo, conteudo, artigo)
+
 	c.HTML(200, "artigo.html", artigo)
+}
+
+func FormatarTempo(a *models.Artigo){
+	a.CriadoModelo = a.Criado.Format(models.ModeloDeTempo)
+	a.AtualizadoModelo = a.UpdatedAt.Format(models.ModeloDeTempo)
 }
