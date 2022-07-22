@@ -10,7 +10,18 @@ func ConfigurarRotas(router *gin.Engine) *gin.Engine{
     {
         artigos := main.Group("artigos")
         {
-            artigos.GET("/test", controllers.Test) 
+            artigos.GET("/test", controllers.Test)
+            artigos.Static("/static", "./static/")   //load static folde
+            artigos.LoadHTMLGlob("templates/*.html") //load templates
+            //routes
+            artigos.GET("/artigos", models.PegarTodosArtigos)
+            artigos.GET("/artigos/:id", models.PegarArtigo)
+            artigos.GET("/artigos/novo", models.FormArtigo)
+            artigos.POST("/artigos/novo", models.FazerArtigo)
+            artigos.POST("/artigos/:id", models.ApagarArtigo)
+            artigos.POST("/artigos/atualizar/form/:id", models.FormAtualizarArtigo)
+            artigos.POST("/artigos/atualizar/:id", models.AtualizarArtigo)
+
         }
     }
 
