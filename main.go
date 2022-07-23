@@ -1,7 +1,13 @@
 package main
 
-import "github.com/zennon-sml/JOJORNAL/controller"
+import(
+    //"github.com/zennon-sml/JOJORNAL/controller"
+    "github.com/zennon-sml/JOJORNAL/server"
+    "github.com/zennon-sml/JOJORNAL/database"
+)
 
 func main() {
-	controller.Main()
+    database.FazerCon()
+    servidor := server.NovoServidor()
+    servidor.Rodar()
 }
