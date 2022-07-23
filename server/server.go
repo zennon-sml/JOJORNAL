@@ -4,6 +4,7 @@ import(
     "github.com/gin-gonic/gin"
     "log"
     "github.com/zennon-sml/JOJORNAL/routes"
+    "os"
 )
 
 type Server struct{
@@ -12,8 +13,9 @@ type Server struct{
 }
 
 func NovoServidor() Server {
+    port := os.Getenv("PORT")
     return Server{
-        Porta: "8080",
+        Porta: port,
         Servidor: gin.Default(),
     }
 }
