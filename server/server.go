@@ -4,7 +4,7 @@ import(
     "github.com/gin-gonic/gin"
     "log"
     "github.com/zennon-sml/JOJORNAL/routes"
-    "os"
+    // "os"
 )
 
 type Server struct{
@@ -14,9 +14,9 @@ type Server struct{
 
 func NovoServidor() Server {
     //pegar porta do ambiente pra fazer deploy heroku
-    port := os.Getenv("PORT")
+    // port := os.Getenv("PORT")
     return Server{
-        Porta: port,
+        Porta: "8080",
         Servidor: gin.Default(),
     }
 }

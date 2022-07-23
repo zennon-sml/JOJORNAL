@@ -7,4 +7,5 @@ import(
 
 func FazerMigrations(bd *gorm.DB){
     bd.AutoMigrate(models.Artigo{})
+    bd.AutoMigrate(models.Administrador{})
 }
