@@ -13,6 +13,7 @@ type Server struct{
 }
 
 func NovoServidor() Server {
+    //pegar porta do ambiente pra fazer deploy heroku
     port := os.Getenv("PORT")
     return Server{
         Porta: port,
