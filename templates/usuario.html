@@ -1,0 +1,22 @@
+<!--index.html-->
+
+<!--Embed the header.html template at this location-->
+{{ template "header.html" .}}
+
+  <h1 class="para">{{.Usuario.Senha}}</h1>
+  <ul class="bar">
+    <li class="esquerda">
+  <form method="POST" action="/jojornal/v1/artigos/{{.ID}}" >
+  <button onclick="return confirm('Deseja Apagar O Arquivo?');" 
+id="btnDelete"><img class="icon" src="/static/img/remove.png"></button>
+  </form>
+    </li>
+    <li><hr width="30" color="none"></li>
+    <li class="direita">
+    <form method="POST" action="/jojornal/v1/artigos/atualizar/form/{{.ID}}" >
+    <button id="btnDelete"><img class="icon" src="/static/img/atualizar.png"></button>
+    </form>
+  </li>
+  </ul>
+<!--Embed the footer.html template at this location-->
+{{ template "footer.html" .}}

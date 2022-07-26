@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Novo Usuario</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/adminLogin.css">
+  </head>
+  <body>
+    <div class="main-block">
+      <h1>Registrar Usuario</h1>
+      <form method="POST" action="/jojornal/v1/usuario/">
+        <hr>
+        <label id="icon" for="email"><i class="fas fa-envelope"></i></label>
+        <input type="text" name="email" id="email" placeholder="Email" required/>
+        <label id="icon" for="nome"><i class="fas fa-user"></i></label>
+        <input type="text" name="nome" id="nome" placeholder="Nome" required/>
+        <label id="icon" for="senha"><i class="fas fa-unlock-alt"></i></label>
+        <input type="password" name="senha" id="senha" placeholder="Senha" required/>
+        <hr>
+        <div class="btn-block">
+          <p>Clicando em confirmar, Voçe concorda com os meus termos<a href="https://github.com/zennon-sml"> Termos</a>.</p>
+          <button type="submit">Confirmar</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
