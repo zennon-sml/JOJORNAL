@@ -18,7 +18,7 @@ func FazerCon() {
 	if err != nil {
 		log.Fatal("Erro carregando o arquivo .env")
 	}
-
+    //https://www.phpmyadmin.co/ link pro php
 	usuario := os.Getenv("DB_USER")
 	senha := os.Getenv("DB_PASSWORD")
 	host := os.Getenv("DB_HOST")

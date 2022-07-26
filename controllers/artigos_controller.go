@@ -6,9 +6,6 @@ import(
 	"github.com/zennon-sml/JOJORNAL/models"
 )
 
-func Test(c *gin.Context){
-    c.JSON(200, gin.H{"test": "testando"})
-}
 func FormArtigo(c *gin.Context) {
 	dados := models.DadosPagina{Titulo: "fazer artigo"}
 	c.HTML(200, "fazerArtigo.html", dados)

@@ -10,9 +10,14 @@ func ConfigurarRotas(router *gin.Engine) *gin.Engine{
     router.LoadHTMLGlob("templates/*.html")
     main := router.Group("jojornal/v1")
     {
+        usuario := main.Group("usuario")
+        {
+            usuario.GET("/", controllers.NovoUsuarioForm)
+            usuario.POST("/", controllers.NovoUsuario)
+            usuario.POST("/login/", controllers.Entrar)
+        }
         artigos := main.Group("artigos")
         {
-            artigos.GET("/test", controllers.Test)
             artigos.GET("/", controllers.PegarTodosArtigos)
             artigos.GET("/:id", controllers.PegarArtigo)
             artigos.POST("/:id", controllers.ApagarArtigo)

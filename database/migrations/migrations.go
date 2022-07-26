@@ -6,6 +6,8 @@ import(
 )
 
 func FazerMigrations(bd *gorm.DB){
-    bd.AutoMigrate(models.Artigo{})
-    bd.AutoMigrate(models.Administrador{})
+    bd.Debug().AutoMigrate(models.Artigo{})
+    bd.Debug().AutoMigrate(models.Administrador{})
+    bd.Debug().AutoMigrate(models.Usuario{})
+    bd.Debug().AutoMigrate(models.Comentarios{})
 }
