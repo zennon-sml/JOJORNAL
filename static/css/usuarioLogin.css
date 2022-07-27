@@ -1,9 +1,9 @@
-      html, body {
+      .user html, body {
       display: flex;
       justify-content: center;
       height: 80%;
       }
-      body, div, h1, form, input, p { 
+      .user body, div, h1, form, input, p { 
       padding: 0;
       margin: 0;
       outline: none;
@@ -11,16 +11,16 @@
       font-size: 16px;
       color: #666;
       }
-      h1 {
+      .user h1 {
       padding: 10px 0;
       font-size: 32px;
       font-weight: 300;
       text-align: center;
       }
-      p {
+      .user p {
       font-size: 12px;
       }
-      hr {
+      .user hr {
       color: #a9a9a9;
       opacity: 0.3;
       }
@@ -34,20 +34,20 @@
       box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
       background: #ebebeb; 
       }
-      form {
+      .user form {
       margin: 0 30px;
       }
       .account-type, .gender {
       margin: 15px 0;
       }
-      input[type=radio] {
+      .user input[type=radio] {
       display: none;
       }
-      label#icon {
+      .user label#icon {
       margin: 0;
       border-radius: 5px 0 0 5px;
       }
-      label.radio {
+      .user label.radio {
       position: relative;
       display: inline-block;
       padding-top: 4px;
@@ -56,7 +56,7 @@
       overflow: visible;
       cursor: pointer;
       }
-      label.radio:before {
+      .user label.radio:before {
       content: "";
       position: absolute;
       top: 2px;
@@ -66,7 +66,7 @@
       border-radius: 50%;
       background: #1c87c9;
       }
-      label.radio:after {
+      .user label.radio:after {
       content: "";
       position: absolute;
       width: 9px;
@@ -79,10 +79,10 @@
       transform: rotate(-45deg);
       opacity: 0;
       }
-      input[type=radio]:checked + label:after {
+      .user input[type=radio]:checked + label:after {
       opacity: 1;
       }
-      input[type=text], input[type=password] {
+      .user input[type=text], input[type=password] {
       width: calc(100% - 57px);
       height: 36px;
       margin: 13px 0 0 -5px;
@@ -92,10 +92,10 @@
       box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
       background: #fff; 
       }
-      input[type=password] {
+      .user input[type=password] {
       margin-bottom: 15px;
       }
-      #icon {
+      .user #icon {
       display: inline-block;
       padding: 9.3px 15px;
       box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
@@ -107,7 +107,7 @@
       margin-top: 10px;
       text-align: center;
       }
-      button {
+     .user  button {
       width: 100%;
       padding: 10px 0;
       margin: 10px auto;
@@ -118,6 +118,6 @@
       font-weight: 600;
       color: #fff;
       }
-      button:hover {
+     .user  button:hover {
       background: #26a9e0;
       }

@@ -37,8 +37,8 @@ type Comentarios struct{
 
 type Artigo struct {
 	ID           uint32`gorm:"primarykey:auto_increment" json:"id"`
-	Titulo       string    `gorm:"type:varchar(100)" json:"titulo"`
-	Conteudo     string    `json:"conteudo"`
+	Titulo       string    `gorm:"type:varchar(100)" json:"titulo" form:"titulo"`
+	Conteudo     string    `json:"conteudo" form:"conteudo"`
 	ImagemUrl	 string    `gorm:"type:varchar(255)" json:"imagem_url"`
 	Criado       time.Time `gorm:"autoCreateTime" json:"criado"`
 	UpdatedAt    time.Time

@@ -3,20 +3,7 @@
 <!--Embed the header.html template at this location-->
 {{ template "header.html" .}}
 
-  <h1 class="para">{{.Usuario.Senha}}</h1>
-  <ul class="bar">
-    <li class="esquerda">
-  <form method="POST" action="/jojornal/v1/artigos/{{.ID}}" >
-  <button onclick="return confirm('Deseja Apagar O Arquivo?');" 
-id="btnDelete"><img class="icon" src="/static/img/remove.png"></button>
-  </form>
-    </li>
-    <li><hr width="30" color="none"></li>
-    <li class="direita">
-    <form method="POST" action="/jojornal/v1/artigos/atualizar/form/{{.ID}}" >
-    <button id="btnDelete"><img class="icon" src="/static/img/atualizar.png"></button>
-    </form>
-  </li>
-  </ul>
+  <h1 class="para">Nome: {{.Usuario.Nome}}</h1>
+  <h1 class="para">Email: {{.Usuario.Email}}</h1>
 <!--Embed the footer.html template at this location-->
 {{ template "footer.html" .}}

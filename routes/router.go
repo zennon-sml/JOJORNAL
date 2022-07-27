@@ -14,7 +14,8 @@ func ConfigurarRotas(router *gin.Engine) *gin.Engine{
         {
             usuario.GET("/", controllers.NovoUsuarioForm)
             usuario.POST("/", controllers.NovoUsuario)
-            usuario.POST("/login/", controllers.Entrar)
+            usuario.GET("/login", controllers.EntrarForm)
+            usuario.POST("/login", controllers.Entrar)
         }
         artigos := main.Group("artigos")
         {

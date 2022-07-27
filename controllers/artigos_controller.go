@@ -1,6 +1,7 @@
 package controllers
 
 import(
+	"log"
     "github.com/gin-gonic/gin"
 	"github.com/zennon-sml/JOJORNAL/database"
 	"github.com/zennon-sml/JOJORNAL/models"
@@ -22,10 +23,13 @@ func FormAtualizarArtigo(c *gin.Context) {
 
 func FazerArtigo(c *gin.Context) {
 	var artigo models.Artigo
-	titulo := c.DefaultPostForm("titulo", "not found")
-	conteudo := c.DefaultPostForm("conteudo", "not found")
-	artigo.Titulo = titulo
-	artigo.Conteudo = conteudo
+	// titulo := c.DefaultPostForm("titulo", "not found")
+	// conteudo := c.DefaultPostForm("conteudo", "not found")
+	if err := c.ShouldBind(&artigo); err != nil{
+		log.Fatal("erro bindando: ", err)
+	}
+	// artigo.Titulo = titulo
+	// artigo.Conteudo = conteudo
 	bd := database.PegarBD()
 	bd.Debug().Create(&artigo)
 	FormatarTempo(&artigo)
